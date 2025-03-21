@@ -29,9 +29,12 @@ criterion = nn.MSELoss()
 
 # 定义优化器（随机梯度下降）
 # 替换为 Adagrad 优化器
-optimizer = optim.SGD(model.parameters(), lr=0.01)
+#optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+# 替换为 Adam 优化器
+optimizer = optim.Adam(model.parameters(), lr=0.1)
 # 定义 StepLR 调度器
-scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=100, gamma=0.1)
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=100, gamma=0.001)
 
 
 # 生成训练数据（加法和减法）
@@ -47,6 +50,9 @@ def generate_data(num_samples=1000):
 # 生成训练集
 x_train, y_train_add, y_train_sub = generate_data()
 
+# 定义正则化率
+regularization_rate = 0.0001
+
 # 训练神经网络（1000个Epoch）
 for epoch in range(1000):
     optimizer.zero_grad()  # 清空梯度
@@ -57,20 +63,28 @@ for epoch in range(1000):
     # 损失函数（学习加法）
     loss = criterion(output.squeeze(), y_train_add)
 
+    # 添加 L2 正则化项
+    l2_reg = torch.tensor(0., requires_grad=True)
+    for name, param in model.named_parameters():
+        if 'weight' in name:
+            l2_reg = l2_reg + torch.norm(param, 2)
+    loss = loss + regularization_rate * l2_reg
+
     # 反向传播
     loss.backward()
 
     # 更新参数
     optimizer.step()
+
     # 更新学习率
     scheduler.step()
 
     # 打印权重和偏置参数
     print(f'Epoch [{epoch + 1}/1000], Loss: {loss.item():.4f}')
-    print("Hidden layer weights:", model.hidden.weight.data)
-    print("Hidden layer bias:", model.hidden.bias.data)
-    print("Output layer weights:", model.output.weight.data)
-    print("Output layer bias:", model.output.bias.data)
+    #print("Hidden layer weights:", model.hidden.weight.data)
+    #print("Hidden layer bias:", model.hidden.bias.data)
+    #print("Output layer weights:", model.output.weight.data)
+    #print("Output layer bias:", model.output.bias.data)
 
 # 测试加法效果
 x_test = torch.tensor([[5, 3]], dtype=torch.float32)
