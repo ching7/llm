@@ -72,10 +72,39 @@ for epoch in range(1000):
 
     # 打印梯度信息
     if epoch % 100 == 0:
-        print("Hidden layer weights gradient:", model.hidden.weight.grad)
-        print("Hidden layer bias gradient:", model.hidden.bias.grad)
-        print("Output layer weights gradient:", model.output.weight.grad)
-        print("Output layer bias gradient:", model.output.bias.grad)
+        # 隐藏层权重梯度公式
+        hidden_weights_grad = model.hidden.weight.grad
+        hidden_weights_grad_formulas = []
+        for i in range(5):
+            formula = f"dW1_{i+1}_x1 = {hidden_weights_grad[i][0].item():.4f}, dW1_{i+1}_x2 = {hidden_weights_grad[i][1].item():.4f}"
+            hidden_weights_grad_formulas.append(formula)
+        print("Hidden layer weights gradient formulas:")
+        for formula in hidden_weights_grad_formulas:
+            print(formula)
+
+        # 隐藏层偏置梯度公式
+        hidden_bias_grad = model.hidden.bias.grad
+        hidden_bias_grad_formulas = []
+        for i in range(5):
+            formula = f"dB1_{i+1} = {hidden_bias_grad[i].item():.4f}"
+            hidden_bias_grad_formulas.append(formula)
+        print("Hidden layer bias gradient formulas:")
+        for formula in hidden_bias_grad_formulas:
+            print(formula)
+
+        # 输出层权重梯度公式
+        output_weights_grad = model.output.weight.grad
+        output_weights_grad_formulas = []
+        for i in range(5):
+            formula = f"dW2_1_a1_{i+1} = {output_weights_grad[0][i].item():.4f}"
+            output_weights_grad_formulas.append(formula)
+        print("Output layer weights gradient formulas:")
+        for formula in output_weights_grad_formulas:
+            print(formula)
+
+        # 输出层偏置梯度公式
+        output_bias_grad = model.output.bias.grad
+        print(f"Output layer bias gradient formula: dB2_1 = {output_bias_grad.item():.4f}")
 
     optimizer.step()  # 更新参数
 
