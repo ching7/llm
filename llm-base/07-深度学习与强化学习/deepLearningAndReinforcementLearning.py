@@ -46,7 +46,8 @@ def generate_data(num_samples=1000):
 
 # 生成训练集
 x_train, y_train_add, y_train_sub = generate_data()
-# 训练循环中添加调度器更新
+
+# 训练神经网络（1000个Epoch）
 for epoch in range(1000):
     optimizer.zero_grad()  # 清空梯度
 
@@ -64,8 +65,12 @@ for epoch in range(1000):
     # 更新学习率
     scheduler.step()
 
-    if (epoch + 1) % 100 == 0:
-        print(f'Epoch [{epoch + 1}/1000], Loss: {loss.item():.4f}, LR: {scheduler.get_last_lr()[0]:.6f}')
+    # 打印权重和偏置参数
+    print(f'Epoch [{epoch + 1}/1000], Loss: {loss.item():.4f}')
+    print("Hidden layer weights:", model.hidden.weight.data)
+    print("Hidden layer bias:", model.hidden.bias.data)
+    print("Output layer weights:", model.output.weight.data)
+    print("Output layer bias:", model.output.bias.data)
 
 # 测试加法效果
 x_test = torch.tensor([[5, 3]], dtype=torch.float32)
