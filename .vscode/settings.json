@@ -1,8 +1,0 @@
-{
-    "python.defaultInterpreterPath": "/Users/chenyanan/Downloads/gitproject/llm/llm-base/.venv1/bin/python",
-    "python.pythonPath": "/Users/chenyanan/Downloads/gitproject/llm/llm-base/.venv1/bin/python",
-    "python.terminal.activateEnvironment": true,
-    "python.terminal.activateEnvInCurrentTerminal": true,
-    "python.languageServer": "None"
-}
-

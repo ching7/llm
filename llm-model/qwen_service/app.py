@@ -1,3 +1,4 @@
+#!/Users/chenyanan/Downloads/gitproject/llm/llm-model/venv/bin/python3
 """
 Qwen 0.6B 模型推理服务
 基于 FastAPI 的持续推理服务，模型加载一次后持续提供服务
