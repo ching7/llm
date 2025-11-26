@@ -1,0 +1,12 @@
+{
+    "model_path": "~/.cache/modelscope/hub/models/Qwen/Qwen3-0___6B",
+    "data_path": "../data/self_cognition.jsonl",
+    "output_dir": "../outputs/sft_results",
+    "num_train_epochs": 3,
+    "per_device_train_batch_size": 1,
+    "learning_rate": 2e-5,
+    "weight_decay": 0.01,
+    "logging_steps": 10,
+    "max_seq_length": 512,
+    "warmup_ratio": 0.1
+}
