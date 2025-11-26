@@ -1,2 +1,4 @@
 llm-base/.idea
 llm-model/venv
+.trae/documents/*
+llm-train/outputs/*

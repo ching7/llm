@@ -50,7 +50,8 @@ def load_model():
     print(f"💻 使用设备: {device}")
     
     # 模型路径
-    model_path = os.path.expanduser("~/.cache/modelscope/hub/models/Qwen/Qwen3-0___6B")
+    # model_path = os.path.expanduser("~/.cache/modelscope/hub/models/Qwen/Qwen3-0___6B")
+    model_path = "/Users/chenyanan/Downloads/gitproject/llm/llm-train/outputs/sft_results/final_model"
     
     print("\n📥 正在加载分词器...")
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
