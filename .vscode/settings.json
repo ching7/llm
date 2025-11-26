@@ -1,0 +1,3 @@
+{
+  "python.defaultInterpreterPath": "./llm-model/venv/bin/python"
+}
